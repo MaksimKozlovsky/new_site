@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Проект Сайта Презентации{% block title %}{% endblock title %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+
+</head>
+<body>
+{% block header %}
+    <img src="{% static '/img/logo.png' %}">
+{% endblock header %}
+
+{% block content %}
+    <h1>Создадим хороший логотип</h1>
+    {% for article in list_of_article %}
+        <hr/>
+        <article>
+            <div class='title1'>{{ article.title }}</div>
+            <div class='title2'>{{ article.text }}</div>
+        </article>
+        {% if forloop.last %}
+            <hr/>
+        {% endif %}
+    {% endfor %}
+{% endblock content %}
+
+
+
+{% block footer %}
+    {% include 'includes/footer.html' %}
+{% endblock footer %}
+
+</body>
+</html>

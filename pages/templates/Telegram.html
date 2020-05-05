@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+{% block header %}
+    <img src="{% static '/img/telegram_logo.jpg' %}">
+{% endblock header %}
+
+{% block content %}
+    <h1>Презентация логотипа Telegram</h1>
+    {% for article in list_of_article %}
+        <hr/>
+        <article>
+            <div class='title'>{{ article.title }}</div>
+            <div class='title'>{{ article.text }}</div>
+        </article>
+        {% if forloop.last %}
+            <hr/>
+        {% endif %}
+    {% endfor %}
+{% endblock content %}
