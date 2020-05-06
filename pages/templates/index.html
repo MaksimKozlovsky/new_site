@@ -19,11 +19,11 @@
 {% block content %}
     <h1>Создадим хороший логотип</h1>
 
-        {% for article in list_of_article %}
+        {% for page in pages %}
             <hr/>
             <article>
-                <div class='title1'>{{ article.title }}</div>
-                <div class='title2'>{{ article.text }}</div>
+                <div>{{ page.title }}</div>
+                <div>{{ page.text | truncatewords:20 }}</div>
             </article>
             {% if forloop.last %}
                 <hr/>

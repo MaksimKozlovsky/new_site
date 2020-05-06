@@ -1,9 +1,14 @@
+body {
+    background-color: antiquewhite
+}
 footer {
     font-size: 35px;
+    background-color: beige;
 }
 
 article {
     font-size: 25px;
+    background-color: cyan;
 }
 
 h1 {

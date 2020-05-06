@@ -25,3 +25,4 @@ urlpatterns = [
     path('Telegram/', views.Telegram)
 
 ]
+

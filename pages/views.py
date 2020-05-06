@@ -8,17 +8,10 @@ from pages.models import Pages
 def index(request):
 
     my_pages = Pages.objects.all()
-    context = {'pages': my_pages}
-
-    my_article = []
-    my_article.append({'title': 'Onliner', 'text': 'Оцени логотип'})
-    my_article.append({'title': 'Telegram', 'text': 'Оцени логотип'})
-
-    context = {
-        'title': 'Страница Onliner',
-        'title': 'Страница Telegram',
-        'list_of_article': my_article
-    }
+#    page_id = Pages.objects.get(pk=request.GET.get('id'))
+    context = {'pages': my_pages,
+#              'pages': page_id
+               }
     return render(request, 'index.html', context=context)
 
 
