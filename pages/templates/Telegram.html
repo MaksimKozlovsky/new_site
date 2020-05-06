@@ -1,8 +1,14 @@
 {% extends 'index.html' %}
 {% load static %}
+
 {% block title %}
     {{ title }}
 {% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock css %}
+
 {% block header %}
     <img src="{% static '/img/telegram_logo.jpg' %}">
 {% endblock header %}

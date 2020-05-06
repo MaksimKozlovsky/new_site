@@ -1,9 +1,15 @@
 from django.shortcuts import render
 from django.conf import settings
 from django.http import HttpResponse
+import os
+from pages.models import Pages
 
 
 def index(request):
+
+    my_pages = Pages.objects.all()
+    context = {'pages': my_pages}
+
     my_article = []
     my_article.append({'title': 'Onliner', 'text': 'Оцени логотип'})
     my_article.append({'title': 'Telegram', 'text': 'Оцени логотип'})
