@@ -23,6 +23,5 @@ urlpatterns = [
     path('', views.index),
     path('Onliner/', views.Onliner),
     path('Telegram/', views.Telegram)
-
 ]
 

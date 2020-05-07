@@ -8,11 +8,17 @@ from pages.models import Pages
 def index(request):
 
     my_pages = Pages.objects.all()
-#    page_id = Pages.objects.get(pk=request.GET.get('id'))
+#    page_id = Pages.objects.get(pk=request.GET.filter('id'))
+    page_id = request.GET.get('id')
+    if page_id:
+        Pages.objects.get(pk=request.GET.get('id'))
+    else:
+        Pages.objects.filter(pk=request.GET.get('id'))
     context = {'pages': my_pages,
-#              'pages': page_id
+#               'pages': page_id
                }
     return render(request, 'index.html', context=context)
+
 
 
 def Onliner(request):
