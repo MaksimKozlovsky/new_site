@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('Onliner/', views.Onliner),
-    path('Telegram/', views.Telegram)
+    path('Telegram/', views.Telegram),
+    path('user_registration/', views.user_registration)
 ]
 

@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Проект Сайта Презентации{% block title %}{% endblock title %}</title>
+    <title>Flash News{% block title %}{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     {% block css %}
@@ -19,9 +19,9 @@
     <div class="container" style="background-color: pink">
 {% block header %}
 <section>
-    <div class="container">
-        <div class="row=12" style="background-color: yellow">
-            <div class="col-6" style="min-height: 100px">
+    <div class="container p-3">
+        <div class="row" style="background-color: antiquewhite">
+            <div class="col-6">
                 <img class="rounded" src="{% static '/img/logo.png' %}">
             </div>
         </div>
@@ -31,42 +31,76 @@
 
 {% block content %}
 <section>
-    <div class="container p5">
-       <div class="row=12 text-center" style="background-color: antiquewhite">
-           <div class="col=12">
-               <h1>Создадим хороший логотип</h1>
+    <div class="container">
+       <div class="row text-center" style="background-color: antiquewhite">
+           <div class="col">
+               <h1>THE HOT NEWS</h1>
            </div>
        </div>
     </div>
 </section>
 <section>
-    <div class="container">
-        <div class="row=12">
-        {% for page in pages %}
-            <hr/>
-            <div class="col" style="background-color: antiquewhite; font-size: 15px">
+        <div class="container pt-3">
+            <div class="row">
 
-                <div>{{ page.title }}</div>
-                <div>{{ page.text | truncatewords:20 }}</div>
+                <div class="col-10 col-xl-8 col-sm-4 " style="background-color: antiquewhite">
+                    {% for page in pages %}
+                    <a href="{{ page.title }}">{{ page.title }}</a>
+                    <div>{{ page.text | truncatewords:20 }}</div>
+                    {% endfor %}
+                </div>
 
+                <div class="col-2 col-xl-4 col-sm-4 d-sm-none d-md-block text-right" style="background-color: antiquewhite">
+
+                    <form action="/user_registration/" method="post">
+                        {% csrf_token %}
+                        <p style="font-size: 20px">Быстрая регистрация на сайте</p>
+
+                        <div>
+                            <label for="name">First Name:</label>
+                            <input type="text" id="first_name" name="first_name">
+                        </div>
+                        <div>
+                            <label for="name">Last Name:</label>
+                            <input type="text" id="last_name" name="last_name">
+                        </div>
+                        <div>
+                            <label for="mail">Email:</label>
+                            <input type="email" id="mail" name="email">
+                        </div>
+                        <div>
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password">
+                        </div>
+                        <div>
+                            <label for="bio">Дополнительная Информация</label>
+                            <textarea id="bio" name="user_bio"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit">Отправить</button>
+                        </div>
+                    </form>
+
+
+
+
+
+
+                 </div>
             </div>
-
-            {% if forloop.last %}
-                <hr/>
-            {% endif %}
-        {% endfor %}
-
-
         </div>
-    </div>
 </section>
 {% endblock content %}
 
 
-
+<section>
+    <div class="container p-3">
 {% block footer %}
     {% include 'includes/footer.html' %}
 {% endblock footer %}
+    </div>
+</section>
+
 
     </div>
 </section>
