@@ -11,26 +11,48 @@
 
 {% block header %}
 <section>
-    <div slass="container">
-        <div class="row=12" style="background-color: antiquewhite">
-            <div class="col=8">
-                 <img src="{% static '/img/telegram_logo.jpg' %}">
+    <div class="container pt-3">
+        <div class="row" style="background-color: antiquewhite">
+            <div class="col">
+                <a href=" /"><img class="rounded" src="{% static '/img/logo.png' %}"></a>
             </div>
         </div>
     </div>
 </section>
 {% endblock header %}
-
 {% block content %}
-    <h1>The latest news</h1>
-    {% for article in list_of_article %}
-        <hr/>
-        <article>
-            <div class='title'>{{ article.title }}</div>
-            <div class='title'>{{ article.text }}</div>
-        </article>
-        {% if forloop.last %}
-            <hr/>
-        {% endif %}
-    {% endfor %}
+<section>
+    <div class="container p-3">
+        <div class="row" >
+            <div class="col-8 col-xl-8 col-sm-8" style="background-color: antiquewhite">
+                <div class="container pt-3">
+                        {% for page in pages %}
+                            <b>{{ page.title }}</b>
+                            <div>{{ page.text }}</div>
+                            <b>Автор статьи: {{ page.author.first_name }} {{ page.author.last_name }}</b>
+                        {% endfor %}
+                </div>
+            </div>
+            <div class="col-4 col-xl-4 col-sm-4 d-sm-none d-md-block  text-right" style="background-color: antiquewhite">
+                <div class="container p-3">
+                    {% block comment %}
+                        {% include 'includes/comment.html' %}
+                    {% endblock comment %}
+                </div>
+            </div>
+        </div>
+        <div class="container pt-3">
+            <div class="row" style="background-color: antiquewhite">
+                <div class="container p-3">
+                    <b>Коментарии:</b>
+                    {% for comment in comments %}
+                    <hr>
+                    <p>Автор: {{ comment.author.first_name }} {{ comment.author.last_name }} / время: {{ comment.created }}</p>
+                    <p>{{ comment.text }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock content %}

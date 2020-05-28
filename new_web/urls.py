@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from pages import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 urlpatterns = [
@@ -23,6 +25,7 @@ urlpatterns = [
     path('', views.index),
     path('Onliner/', views.Onliner),
     path('Telegram/', views.Telegram),
-    path('user_registration/', views.user_registration)
-]
+    path('login/', views.login_up),
+    path('login_up/', views.login_up)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

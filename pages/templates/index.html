@@ -19,10 +19,19 @@
     <div class="container" style="background-color: pink">
 {% block header %}
 <section>
-    <div class="container p-3">
+    <div class="container pt-3">
         <div class="row" style="background-color: antiquewhite">
             <div class="col-6">
-                <img class="rounded" src="{% static '/img/logo.png' %}">
+                <div class="container pt-3">
+                    <a href=" /"><img class="rounded" src="{% static '/img/logo.png' %}"></a>
+                </div>
+            </div>
+            <div class="col-6 text-center">
+                <div class="container pt-3">
+                    {% block login %}
+                        {% include 'includes/login.html' %}
+                    {% endblock login %}
+                </div>
             </div>
         </div>
     </div>
@@ -31,10 +40,10 @@
 
 {% block content %}
 <section>
-    <div class="container">
+    <div class="container pt-3">
        <div class="row text-center" style="background-color: antiquewhite">
            <div class="col">
-               <h1>THE HOT NEWS</h1>
+               <h1>HOT NEWS</h1>
            </div>
        </div>
     </div>
@@ -42,51 +51,54 @@
 <section>
         <div class="container pt-3">
             <div class="row">
-
-                <div class="col-10 col-xl-8 col-sm-4 " style="background-color: antiquewhite">
-                    {% for page in pages %}
-                    <a href="{{ page.title }}">{{ page.title }}</a>
-                    <div>{{ page.text | truncatewords:20 }}</div>
-                    {% endfor %}
+                <div class="col-8 col-xl-8 col-sm-8" style="background-color: antiquewhite">
+                    <div class="container pt-3">
+                        {% for page in pages %}
+                            <a href="/?id={{ page.pk }}">{{ page.title }}</a>
+                            <p></p>
+                            <div>Автор статьи: {{ page.author.first_name }} {{ page.author.last_name }}</div>
+                            <div>Добавлена: {{ page.created }}</div>
+                            <p></p>
+                            <div>{{ page.text | truncatewords:20 }}</div>
+                            <hr>
+                        {% endfor %}
+                    </div>
                 </div>
+                <div class="col-4 col-xl-4 col-sm-4" style="background-color: antiquewhite">
+                    <div class="container pt-3">
 
-                <div class="col-2 col-xl-4 col-sm-4 d-sm-none d-md-block text-right" style="background-color: antiquewhite">
+                    </div>
 
-                    <form action="/user_registration/" method="post">
-                        {% csrf_token %}
-                        <p style="font-size: 20px">Быстрая регистрация на сайте</p>
-
-                        <div>
-                            <label for="name">First Name:</label>
-                            <input type="text" id="first_name" name="first_name">
-                        </div>
-                        <div>
-                            <label for="name">Last Name:</label>
-                            <input type="text" id="last_name" name="last_name">
-                        </div>
-                        <div>
-                            <label for="mail">Email:</label>
-                            <input type="email" id="mail" name="email">
-                        </div>
-                        <div>
-                            <label for="password">Password:</label>
-                            <input type="password" id="password" name="password">
-                        </div>
-                        <div>
-                            <label for="bio">Дополнительная Информация</label>
-                            <textarea id="bio" name="user_bio"></textarea>
-                        </div>
-                        <div>
-                            <button type="submit">Отправить</button>
-                        </div>
-                    </form>
-
-
-
-
-
-
-                 </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8 col-xl-8 col-sm-8" style="background-color: antiquewhite">
+                    <div class="container pt-3">
+                        {% if page %}
+                            <b>{{ page.title }}</b>
+                            <p></p>
+                            <div>Автор статьи: {{ page.author.first_name }} {{ page.author.last_name }}</div>
+                            <p></p>
+                            <div>{{ page.text }}</div>
+                        <p></p>
+                        <b>Коментарии:</b>
+                        {% for comment in comments %}
+                        <hr>
+                        <p></p>
+                            <p>Автор: {{ comment.author.first_name }} / Время: {{ comment.created }}</p>
+                            <p></p>
+                            <p>{{ comment.text }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-4 col-xl-4 col-sm-4 d-sm-none d-md-block  text-right" style="background-color: antiquewhite">
+                    <div class="container pt-3">
+                        {% block comment %}
+                            {% include 'includes/comment.html' %}
+                        {% endblock comment %}
+                    </div>
+                </div>
+                        {% endif %}
             </div>
         </div>
 </section>
