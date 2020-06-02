@@ -3,10 +3,13 @@ from django.conf import settings
 from django.http import HttpResponse
 import os
 from pages.models import Pages, Comment
+from pages.forms import RegistrationForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 
@@ -45,8 +48,8 @@ def login_up(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            if user == 'root':
-                return redirect('admin/')
+            if user.is_superuser:
+                return redirect('/admin/')
             else:
                 return redirect('/')
     else:
@@ -55,6 +58,27 @@ def login_up(request):
     return render(request, 'login_up.html', context=context)
 
 
+def registration(request):
+    if request.user.is_authenticated:
+        if request.user.is_superuser:
+            return redirect('/admin/')
+        else:
+            return redirect('/')
+    if request.method == 'POST':
+        form = RegistrationForm(data=request.POST)
+        if form.is_valid():
+            User.objects.create_user(
+                first_name=form.cleaned_data['first_name'],
+                last_name=form.cleaned_data['last_name'],
+                email=form.cleaned_data['email'],
+                password=form.cleaned_data['password'],
+                username=form.cleaned_data['email']
+            )
+            return redirect('/')
+    else:
+        form = RegistrationForm()
+    context = {'form': form}
+    return render(request, 'login_up.html', context=context)
 
 
 

@@ -26,6 +26,7 @@ urlpatterns = [
     path('Onliner/', views.Onliner),
     path('Telegram/', views.Telegram),
     path('login/', views.login_up),
-    path('login_up/', views.login_up)
+    path('login_up/', views.login_up),
+    path('registration/', views.registration)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
